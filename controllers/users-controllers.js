@@ -66,6 +66,7 @@ const login = async (req, res, next) => {
 };
 
 const signup = async (req, res, next) => {
+  console.log("Inside fun");
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(

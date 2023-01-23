@@ -16,10 +16,6 @@ router.use(checkAuth);
 router.post(
   "/",
   fileUpload.single("image"),
-  (req, res, next) => {
-    req.body.image = req.file.path;
-    next();
-  },
   [
     check("title").not().isEmpty(),
     check("description").isLength({ min: 5 }),
