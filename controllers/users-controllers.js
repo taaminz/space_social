@@ -68,9 +68,10 @@ const login = async (req, res, next) => {
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return next(
-      new HttpError("Invalid inputs passed, please check your data.", 422)
-    );
+    for (const property in errors.mapped()) {
+      const errMsg = errors.mapped()[property]["msg"];
+      return next(new HttpError(errMsg, 422));
+    }
   }
   const { name, email, password } = req.body;
 
@@ -108,6 +109,7 @@ const signup = async (req, res, next) => {
     name,
     email,
     image: req.file.path,
+    //image: "req.file.path",
     password: hashedPassword,
     places: [],
   });

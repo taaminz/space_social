@@ -17,9 +17,9 @@ router.post(
   "/",
   fileUpload.single("image"),
   [
-    check("title").not().isEmpty(),
-    check("description").isLength({ min: 5 }),
-    check("address").not().isEmpty(),
+    check("title","Enter a valid title").not().isEmpty(),
+    check("description", "Enter a valid description").isLength({ min: 5 }),
+    check("address","Enter a valid description").not().isEmpty(),
   ],
   placeControllers.createPlace
 );
