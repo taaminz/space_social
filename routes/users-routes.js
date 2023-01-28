@@ -10,11 +10,11 @@ router.post(
   "/signup",
   fileUpload.single('image'),
   [
-    check("name").not().isEmpty(),
-    check("email")
+    check("name","Enter a valid name").not().isEmpty(),
+    check("email","Enter a valid email address")
       .normalizeEmail() // Test@test.com => test@test.com
       .isEmail(),
-    check("password").isLength({ min: 6 }),
+    check("password","Enter a valid password").isLength({ min: 6 }),
   ],
   usersController.signup
 );
