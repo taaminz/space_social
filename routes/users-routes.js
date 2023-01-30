@@ -1,20 +1,24 @@
 const express = require("express");
-const { check } = require('express-validator');
+const { check } = require("express-validator");
 const usersController = require("../controllers/users-controllers");
-const fileUpload = require('../middleware/file-upload');
+const imageUpload = require("../middleware/image-upload");
+const HttpError = require("../models/http-error");
+
 
 const router = express.Router();
 
 router.get("/", usersController.getUsers);
+
+
 router.post(
   "/signup",
-  fileUpload.single('image'),
+  imageUpload,
   [
-    check("name","Enter a valid name").not().isEmpty(),
-    check("email","Enter a valid email address")
-      .normalizeEmail() // Test@test.com => test@test.com
+    check("name", "Enter a valid name").not().isEmpty(),
+    check("email", "Enter a valid email address")
+      .normalizeEmail() 
       .isEmail(),
-    check("password","Enter a valid password").isLength({ min: 6 }),
+    check("password", "Enter a valid password").isLength({ min: 6 }),
   ],
   usersController.signup
 );

@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . .
 
-ENV $(cat .env | xargs)
+#ENV $(cat .env | xargs)
 
 EXPOSE 5000
 
